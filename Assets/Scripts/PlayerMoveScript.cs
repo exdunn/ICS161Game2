@@ -5,35 +5,38 @@ using UnityEngine;
 public class PlayerMoveScript : MonoBehaviour
 {
     private bool canJump;
+    public GameObject staff;
+    public GameObject player;
 
     private void Start()
     {
         canJump = true;
     } 
 
-    void Update()
+    void FixedUpdate()
     {
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * Const.ROTSPEED;
         var z = Input.GetAxis("Vertical") * Time.deltaTime * Const.MOVESPEED;
+
+        if (Input.GetAxis("Vertical") != 0f)
+        {
+            Debug.Log("moving!");
+            staff.GetComponent<Animator>().SetBool("Moving", true);
+        }
+        else
+        {
+            staff.GetComponent<Animator>().SetBool("Moving", false);
+        }
 
         if (canJump)
         {
             if (Input.GetButton("Jump"))
             {
-                Debug.Log("jump!");
-                GetComponent<Rigidbody>().AddForce(Vector3.up * Const.JUMPSPEED);
+                player.GetComponent<Rigidbody>().AddForce(Vector3.up * Const.JUMPSPEED);
                 canJump = false;
             }
         }
-        transform.Rotate(0, x, 0);
-        transform.Translate(0, 0, z);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag.Equals("ground"))
-        {
-            canJump = true;
-        }
+        player.transform.Rotate(0, x, 0);
+        player.transform.Translate(0, 0, z);
     }
 }
