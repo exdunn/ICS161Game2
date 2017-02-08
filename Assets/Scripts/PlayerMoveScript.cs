@@ -15,24 +15,25 @@ public class PlayerMoveScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * Const.ROTSPEED;
-        var z = Input.GetAxis("Vertical") * Time.deltaTime * Const.MOVESPEED;
+        var x = Input.GetAxis ("Horizontal") * Time.deltaTime * Const.ROTSPEED;
+        var z = Input.GetAxis ("Vertical") * Time.deltaTime * Const.MOVESPEED;
 
         if (Input.GetAxis("Vertical") != 0f)
         {
-            Debug.Log("moving!");
-            staff.GetComponent<Animator>().SetBool("Moving", true);
+            staff.GetComponent<Animator> ().SetBool ("Moving", true);
+            player.GetComponent<Animator>().SetBool("Moving", true);
         }
         else
         {
-            staff.GetComponent<Animator>().SetBool("Moving", false);
+            staff.GetComponent<Animator> ().SetBool ("Moving", false);
+            player.GetComponent<Animator>().SetBool("Moving", false);
         }
 
         if (canJump)
         {
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton ("Jump"))
             {
-                player.GetComponent<Rigidbody>().AddForce(Vector3.up * Const.JUMPSPEED);
+                player.GetComponent<Rigidbody> ().AddForce (Vector3.up * Const.JUMPSPEED);
                 canJump = false;
             }
         }
