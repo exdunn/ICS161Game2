@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour
 {
-    private bool canJump;
     public GameObject staff;
     public GameObject player;
-
-    private void Start()
-    {
-        canJump = true;
-    } 
 
     void FixedUpdate()
     {
@@ -28,16 +22,24 @@ public class PlayerMoveScript : MonoBehaviour
             staff.GetComponent<Animator> ().SetBool ("Moving", false);
             player.GetComponent<Animator>().SetBool("Moving", false);
         }
+        /*if(Input.GetAxis("Horizontal") != 0f)
+        {
+            player.GetComponent<Animator>().applyRootMotion = true;
+        }
+        else
+        {
+            player.GetComponent<Animator>().applyRootMotion = false;
+        }*/
 
-        if (canJump)
+        if (player.GetComponent<PlayerCollision> ().getCanJump ())
         {
             if (Input.GetButton ("Jump"))
             {
                 player.GetComponent<Rigidbody> ().AddForce (Vector3.up * Const.JUMPSPEED);
-                canJump = false;
+                player.GetComponent<PlayerCollision> ().canJumpFalse ();
             }
         }
-        player.transform.Rotate(0, x, 0);
-        player.transform.Translate(0, 0, z);
+        transform.Rotate(0, x, 0);
+        transform.Translate(0, 0, z);
     }
 }
