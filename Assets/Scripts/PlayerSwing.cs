@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerSwing : MonoBehaviour {
 
-    public GameObject staff;
+    GameObject staff;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Awake () {
+        staff = transform.Find("Player/Staff").gameObject;
 	}
 	
 	// Update is called once per frame
@@ -16,8 +16,6 @@ public class PlayerSwing : MonoBehaviour {
     {
         if (Input.GetButtonDown ("Fire1"))
         {
-
-            Debug.Log("swing!");
             staff.GetComponent<Animator>().SetTrigger("Swing");
         }	
 	}

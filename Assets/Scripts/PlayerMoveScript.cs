@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PlayerMoveScript : MonoBehaviour
 {
-    public GameObject staff;
-    public GameObject player;
+    private GameObject staff;
+    private GameObject player;
+
+    void Awake ()
+    {
+
+        player = transform.GetChild(0).gameObject;
+        staff = transform.Find("Player/Staff").gameObject;
+    }
 
     void FixedUpdate()
     {
@@ -20,7 +27,7 @@ public class PlayerMoveScript : MonoBehaviour
         else
         {
             staff.GetComponent<Animator> ().SetBool ("Moving", false);
-            player.GetComponent<Animator>().SetBool("Moving", false);
+            player.GetComponent<Animator> ().SetBool("Moving", false);
         }
         /*if(Input.GetAxis("Horizontal") != 0f)
         {
