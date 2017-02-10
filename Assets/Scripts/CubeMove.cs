@@ -19,12 +19,15 @@ public class CubeMove : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(transform.position, target.position);
-        if (distance < 10f && distance > 0f)
-        { 
-            myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), Const.ROTSPEED * Time.deltaTime);
-            myTransform.position += myTransform.forward * Const.MOVESPEED / 2 * Time.deltaTime;
+        if (distance < 20f && distance > 1f)
+        {
+            var point = target.transform.position;
+            point.y = transform.position.y;
+            transform.LookAt(point);
+            //myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), Const.ROTSPEED * Time.deltaTime);
+            myTransform.position += myTransform.forward * Const.MOVESPEED / 4 * Time.deltaTime;
         }
-        else if (distance <= 0f)
+        else if (distance <= 1f)
         {
             myTransform.rotation = Quaternion.Slerp(myTransform.rotation, Quaternion.LookRotation(target.position - myTransform.position), Const.ROTSPEED * Time.deltaTime);
         }
