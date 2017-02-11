@@ -7,10 +7,22 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 100;
     public int curHealth = 100;
 
+    private GameObject player;
+    private GUIStyle style;
     private float healthBarLen;
 
+    void Awake ()
+    {
+        style = new GUIStyle();
+        style.normal.textColor = Color.white;
+        style.alignment = TextAnchor.UpperCenter;
+        style.fontSize = 18;
+    }
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
         healthBarLen = Screen.width / 2;
 	}
 
@@ -21,8 +33,23 @@ public class EnemyHealth : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box (new Rect (10, 40, healthBarLen, 25), curHealth + "/" + maxHealth);
+        PlayerAttack pa = (PlayerAttack)player.GetComponent<PlayerAttack>();
+        if (pa.GetTarget() == gameObject)
+        {
+            GUI.Label(new Rect(HealthBarPosition(healthBarLen), 45, healthBarLen, 25), gameObject.name, style);
+            GUI.Box(new Rect(HealthBarPosition(healthBarLen), 70, healthBarLen, 25), curHealth + "/" + maxHealth);
+        }
     } 
+
+    private float NameLen ()
+    {
+        return 0f;
+    }
+
+    private float HealthBarPosition (float length)
+    {
+        return Screen.width / 2 - length / 2;
+    }
 
     public void AdjustCurHealth (int adj)
     {
@@ -40,6 +67,6 @@ public class EnemyHealth : MonoBehaviour
             maxHealth = 1;
         }
 
-        healthBarLen = (Screen.width / 2) * (curHealth / (float) maxHealth);
+        healthBarLen = (Screen.width / 3) * (curHealth / (float) maxHealth);
     }
 }

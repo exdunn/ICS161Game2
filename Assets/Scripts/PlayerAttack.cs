@@ -56,4 +56,9 @@ public class PlayerAttack : MonoBehaviour {
     {
         target = go;
     }
+
+    public GameObject GetTarget ()
+    {
+        return target;
+    }
 }

@@ -69,7 +69,7 @@ public class Targeting : MonoBehaviour
 
     private void DeselectTarget ()
     {
-        selectedTarget.GetComponent<Renderer>().material.color = Color.green;
+        selectedTarget.GetComponent<Renderer>().material.color = Color.white;
         selectedTarget = null;
     }
 

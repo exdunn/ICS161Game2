@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box (new Rect (10, 10, healthBarLen, 25), curHealth + "/" + maxHealth);
+        GUI.Box (new Rect (Screen.width / 4, 10, healthBarLen, 25), curHealth + "/" + maxHealth);
     } 
 
     public void AdjustCurHealth (int adj)
