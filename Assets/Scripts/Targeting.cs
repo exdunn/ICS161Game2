@@ -6,7 +6,7 @@ public class Targeting : MonoBehaviour
 {
     private Transform myTransform;
 
-    public List<Transform> targets;
+    private List<Transform> targets;
     public Transform selectedTarget;
 
 	// Use this for initialization
@@ -15,14 +15,12 @@ public class Targeting : MonoBehaviour
         myTransform = transform;
         targets = new List<Transform>();
         selectedTarget = null;
-
-        AddAllEnemies();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
             TargetEnemy();
 	}
 
