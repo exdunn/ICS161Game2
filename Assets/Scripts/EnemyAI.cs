@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
     private float movespeed = 1.5f;
     private Transform target;
     private Transform myTransform;
+    private float maxDistance;
 
     void Awake ()
     {
@@ -18,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         target = go.transform;
+        maxDistance = 2.0f;
 	}
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             target.position - myTransform.position), (Const.ROTSPEED / 2) * Time.deltaTime);
 
         // move towards target
-        if (distance > 2f)
+        if (distance > maxDistance)
         { 
             myTransform.position += myTransform.forward * movespeed * Time.deltaTime;
         }

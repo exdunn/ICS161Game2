@@ -2,24 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSwing : MonoBehaviour {
-
-    private GameObject staff;
+public class EnemyAttack : MonoBehaviour {
+    
     private GameObject target;
     private float attackTimer;
 
-	void Awake ()
-    {    
-        staff = transform.Find("Staff").gameObject;
-	}
-
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("enemy");
+        target = GameObject.FindGameObjectWithTag("Player");
+        attackTimer = 0;
     }
 
     // Update is called once per frame
-	void Update ()
+    void Update()
     {
         if (attackTimer > 0)
         {
@@ -30,13 +25,12 @@ public class PlayerSwing : MonoBehaviour {
             attackTimer = 0;
         }
 
-        if (attackTimer == 0 && Input.GetButtonDown ("Fire1"))
+        if (attackTimer == 0)
         {
-            staff.GetComponent<Animator>().SetTrigger("Swing");
             Attack();
             attackTimer = Const.COOLDOWN;
-        }	
-	}
+        }
+    }
 
     private void Attack()
     {
@@ -45,11 +39,10 @@ public class PlayerSwing : MonoBehaviour {
         Vector3 dir = (target.transform.position - transform.position).normalized;
         float direction = Vector3.Dot(dir, transform.forward);
 
-        Debug.Log(direction);
         if (distance < 2.5f && direction > 0.6f)
         {
-            EnemyHealth eh = (EnemyHealth)target.GetComponent("EnemyHealth");
-            eh.AdjustCurHealth(-10);
+            PlayerHealth ph = (PlayerHealth)target.GetComponent("PlayerHealth");
+            ph.AdjustCurHealth(-10);
         }
     }
 }
