@@ -29,14 +29,6 @@ public class PlayerMoveScript : MonoBehaviour
             staff.GetComponent<Animator> ().SetBool ("Moving", false);
             player.GetComponent<Animator> ().SetBool("Moving", false);
         }
-        /*if(Input.GetAxis("Horizontal") != 0f)
-        {
-            player.GetComponent<Animator>().applyRootMotion = true;
-        }
-        else
-        {
-            player.GetComponent<Animator>().applyRootMotion = false;
-        }*/
 
         if (player.GetComponent<PlayerCollision> ().getCanJump ())
         {

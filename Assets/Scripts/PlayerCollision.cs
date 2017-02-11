@@ -16,7 +16,6 @@ public class PlayerCollision : MonoBehaviour {
     {
         if (collision.gameObject.tag.Equals("ground"))
         {
-            Debug.Log("TEST");
             canJump = true;
         }
     }
