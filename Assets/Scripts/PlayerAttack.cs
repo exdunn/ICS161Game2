@@ -40,15 +40,18 @@ public class PlayerAttack : MonoBehaviour {
 
     private void Attack()
     {
-        float distance = Vector3.Distance(target.transform.position, transform.position);
-
-        Vector3 dir = (target.transform.position - transform.position).normalized;
-        float direction = Vector3.Dot(dir, transform.forward);
-
-        if (distance < 4.0f && direction > 0.6f)
+        if (target)
         {
-            EnemyHealth eh = (EnemyHealth)target.GetComponent("EnemyHealth");
-            eh.AdjustCurHealth(-10);
+            float distance = Vector3.Distance(target.transform.position, transform.position);
+
+            Vector3 dir = (target.transform.position - transform.position).normalized;
+            float direction = Vector3.Dot(dir, transform.forward);
+
+            if (distance < 7.0f && direction > 0.6f)
+            {
+                EnemyHealth eh = (EnemyHealth)target.GetComponent("EnemyHealth");
+                eh.AdjustCurHealth(-20);
+            }
         }
     }
 

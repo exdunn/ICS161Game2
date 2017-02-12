@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    private float movespeed = 1.5f;
+    private float movespeed = 3f;
     private Transform target;
     private Transform myTransform;
     private float maxDistance;

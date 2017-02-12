@@ -16,7 +16,7 @@ public class EnemyHealth : MonoBehaviour
         style = new GUIStyle();
         style.normal.textColor = Color.white;
         style.alignment = TextAnchor.UpperCenter;
-        style.fontSize = 18;
+        style.fontSize = 16;
     }
 
 	// Use this for initialization
@@ -36,8 +36,8 @@ public class EnemyHealth : MonoBehaviour
         PlayerAttack pa = (PlayerAttack)player.GetComponent<PlayerAttack>();
         if (pa.GetTarget() == gameObject)
         {
-            GUI.Label(new Rect(HealthBarPosition(healthBarLen), 45, healthBarLen, 25), gameObject.name, style);
-            GUI.Box(new Rect(HealthBarPosition(healthBarLen), 70, healthBarLen, 25), curHealth + "/" + maxHealth);
+            GUI.Label(new Rect(HealthBarPosition(healthBarLen), 10, healthBarLen, 25), gameObject.name, style);
+            GUI.Box(new Rect(HealthBarPosition(healthBarLen), 30, healthBarLen, 25), curHealth + "/" + maxHealth);
         }
     } 
 
@@ -67,6 +67,6 @@ public class EnemyHealth : MonoBehaviour
             maxHealth = 1;
         }
 
-        healthBarLen = (Screen.width / 3) * (curHealth / (float) maxHealth);
+        healthBarLen = (Screen.width / 2) * (curHealth / (float) maxHealth);
     }
 }

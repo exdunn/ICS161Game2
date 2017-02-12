@@ -39,7 +39,7 @@ public class EnemyAttack : MonoBehaviour {
         Vector3 dir = (target.transform.position - transform.position).normalized;
         float direction = Vector3.Dot(dir, transform.forward);
 
-        if (distance < 2.5f && direction > 0.6f)
+        if (distance < 3.5f && direction > 0.6f)
         {
             PlayerHealth ph = (PlayerHealth)target.GetComponent("PlayerHealth");
             ph.AdjustCurHealth(-10);

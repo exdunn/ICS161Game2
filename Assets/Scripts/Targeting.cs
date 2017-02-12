@@ -16,12 +16,15 @@ public class Targeting : MonoBehaviour
         targets = new List<Transform>();
         selectedTarget = null;
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Debug.Log(selectedTarget);
             TargetEnemy();
+        }
 	}
 
     private void TargetEnemy ()
@@ -84,5 +87,10 @@ public class Targeting : MonoBehaviour
     public void AddTarget (Transform enemy)
     {
         targets.Add(enemy);
+    }
+
+    public void RemoveTarget (Transform enemy)
+    {
+        targets.Remove(enemy);
     }
 }

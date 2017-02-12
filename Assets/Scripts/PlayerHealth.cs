@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     public int curHealth = 100;
+    public Sprite[] healthSprites;
 
     private float healthBarLen;
 
@@ -21,7 +22,13 @@ public class PlayerHealth : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box (new Rect (Screen.width / 4, 10, healthBarLen, 25), curHealth + "/" + maxHealth);
+        //GUI.Box (new Rect (Screen.width / 4, 10, healthBarLen, 25), curHealth + "/" + maxHealth);
+        Vector2 size = GetSpriteSize();
+
+        GUI.DrawTextureWithTexCoords(
+            new Rect(Screen.width / 8, Screen.height - Screen.height / 4, size.x * 1.1f, size.y * 1.1f),
+            healthSprites[GetSpriteIndex()].texture, GetSpriteRect(healthSprites[GetSpriteIndex()])
+            );
     } 
 
     public void AdjustCurHealth (int adj)
@@ -41,5 +48,26 @@ public class PlayerHealth : MonoBehaviour
         }
 
         healthBarLen = (Screen.width / 2) * (curHealth / (float) maxHealth);
+    }
+
+    private Rect GetSpriteRect (Sprite s)
+    {
+        Texture t = s.texture;
+        Rect tr = s.textureRect;
+        Rect r = new Rect(tr.x / t.width, tr.y / t.height, tr.width / t.width, tr.height / t.height);
+        return r;
+    }
+
+    private int GetSpriteIndex ()
+    {
+        float healthPercent = (float)(curHealth + 10) / (float)maxHealth;
+        int damage = 5 - (int)(healthPercent * 5);
+        return damage < 5 ? damage : 4;
+    }
+
+    private Vector2 GetSpriteSize()
+    {
+        Sprite sprite = healthSprites[0];
+        return new Vector2(sprite.rect.width, sprite.rect.height);
     }
 }

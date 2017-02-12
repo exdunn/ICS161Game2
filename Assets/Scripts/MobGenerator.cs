@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MobGenerator : MonoBehaviour
 {
+    private float timer;
+
     public enum State
     {
         Idle,
@@ -17,6 +19,7 @@ public class MobGenerator : MonoBehaviour
 
     void Awake()
     {
+        timer = Const.SPAWNRATE;
         state = State.Initialize;
     }
 
@@ -36,6 +39,9 @@ public class MobGenerator : MonoBehaviour
                 case State.SpawnMob:
                     SpawnMob();
                     break;
+                case State.Idle:
+                    Idle();
+                    break;
             }
             yield return 0;
         }
@@ -43,7 +49,7 @@ public class MobGenerator : MonoBehaviour
 
     private void Initialize ()
     {
-        Debug.Log("We are in Initialize");
+        //Debug.Log("We are in Initialize");
 
         if (!CheckForMobPrefab() || !CheckForSpawnPonts())
             return;
@@ -53,14 +59,27 @@ public class MobGenerator : MonoBehaviour
 
     private void Setup()
     {
-        Debug.Log("We are in Setup");
+        //Debug.Log("We are in Setup");
 
         state = State.SpawnMob;
+    }
+    private void Idle ()
+    {
+        if (timer > 0 && AvailableSpawnPoints().Length > 0)
+            timer -= Time.deltaTime;
+        if (timer < 0)
+            timer = 0;
+
+        if (AvailableSpawnPoints().Length > 0 && timer == 0)
+        {
+            state = State.Setup;
+            timer = Const.SPAWNRATE;
+        }
     }
 
     private void SpawnMob ()
     {
-        Debug.Log("We are in SpawnMob");
+        //Debug.Log("We are in SpawnMob");
 
         GameObject[] gos = AvailableSpawnPoints();
 
@@ -98,6 +117,7 @@ public class MobGenerator : MonoBehaviour
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
+            // Debug.Log("Spawner" + spawnPoints[i].name + ": " + spawnPoints[i].transform.childCount);
             if (spawnPoints[i].transform.childCount == 0)
             {
                 Debug.Log("Spawn Point available");
