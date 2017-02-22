@@ -10,13 +10,16 @@ public class EnemyHealth : MonoBehaviour
     private GameObject player;
     private GUIStyle style;
     private float healthBarLen;
+    private Font myFont;
 
     void Awake ()
     {
         style = new GUIStyle();
         style.normal.textColor = Color.white;
         style.alignment = TextAnchor.UpperCenter;
-        style.fontSize = 16;
+        style.fontSize = 22;
+        myFont = (Font)Resources.Load("FISH&CHIPS-Regular", typeof(Font));
+        style.font = myFont;
     }
 
 	// Use this for initialization
@@ -24,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         healthBarLen = Screen.width / 2;
+
 	}
 
 	// Update is called once per frame

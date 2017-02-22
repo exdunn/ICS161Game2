@@ -50,7 +50,7 @@ public class PlayerAttack : MonoBehaviour {
             if (distance < 7.0f && direction > 0.6f)
             {
                 EnemyHealth eh = (EnemyHealth)target.GetComponent("EnemyHealth");
-                eh.AdjustCurHealth(-20);
+                eh.AdjustCurHealth(-Const.PLAYERDAMAGE);
             }
         }
     }

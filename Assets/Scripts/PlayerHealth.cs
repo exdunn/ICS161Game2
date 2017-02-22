@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
         Vector2 size = GetSpriteSize();
 
         GUI.DrawTextureWithTexCoords(
-            new Rect(Screen.width / 8, Screen.height - Screen.height / 4, size.x * 1.1f, size.y * 1.1f),
+            new Rect(Screen.width / 8, Screen.height - Screen.height / 4, size.x * 1.5f, size.y * 1.5f),
             healthSprites[GetSpriteIndex()].texture, GetSpriteRect(healthSprites[GetSpriteIndex()])
             );
     } 
@@ -60,6 +60,17 @@ public class PlayerHealth : MonoBehaviour
 
     private int GetSpriteIndex ()
     {
+        int index = 4;
+        if (curHealth >= 90)
+            index = 0;
+        else if (curHealth >= 60)
+            index = 1;
+        else if (curHealth >=30)
+            index = 2;
+        else if (curHealth >= 1)
+            index = 3;
+        return index;
+
         float healthPercent = (float)(curHealth + 10) / (float)maxHealth;
         int damage = 5 - (int)(healthPercent * 5);
         return damage < 5 ? damage : 4;

@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour {
 
     private bool canJump;
+    private PlayerHealth ph;
 
     private void Start ()
     {
+        ph = GetComponent<PlayerHealth>();
         canJump = true;
     }
 
@@ -17,6 +19,16 @@ public class PlayerCollision : MonoBehaviour {
         if (collision.gameObject.tag.Equals("ground"))
         {
             canJump = true;
+        }
+       
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+         if (collider.gameObject.tag.Equals("Bottom"))
+        {
+            Debug.Log("Fall");
+            ph.AdjustCurHealth(-ph.curHealth);
         }
     }
 

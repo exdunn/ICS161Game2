@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
     private Transform target;
     private Transform myTransform;
     private float maxDistance;
+    private GameManager gm;
 
     void Awake ()
     {
@@ -17,6 +18,7 @@ public class EnemyAI : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        gm = GameObject.FindGameObjectWithTag("Manager").GetComponent<GameManager>();
         GameObject go = GameObject.FindGameObjectWithTag("Player");
         target = go.transform;
         maxDistance = 2.0f;
@@ -34,8 +36,10 @@ public class EnemyAI : MonoBehaviour
 
         // move towards target
         if (distance > maxDistance)
-        { 
-            myTransform.position += myTransform.forward * movespeed * Time.deltaTime;
+        {
+            // increase enemy speed as player score increases
+            float speedModifier = 0.5f * (float)gm.GetScore();
+            myTransform.position += myTransform.forward * (movespeed +speedModifier ) * Time.deltaTime;
         }
 	}
 }
