@@ -15,20 +15,16 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         float rotation = Input.GetAxis("Rotation Axis");
-        float moveY = Input.GetAxis("Horizontal");
+        float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
         Rigidbody rb = GetComponent<Rigidbody>();
 
-
+        Vector3 move = new Vector3(moveX, 0, moveZ);
         // movement based on WASD
-        if (moveY != 0)
-        {
-            rb.MovePosition(rb.transform.position + rb.transform.right * moveY * Const.MOVESPEED);
-        }
-        if (moveZ != 0)
-        {
-            rb.MovePosition(rb.transform.position + rb.transform.forward * moveZ * Const.MOVESPEED);
-        }
+  
+            rb.MovePosition(rb.transform.position + move * Const.MOVESPEED);
+            //rb.MovePosition(rb.transform.position + rb.transform.forward * moveZ * Const.MOVESPEED);
+
         if (rotation != 0)
         {
             Vector3 rotationY = new Vector3(0f, rotation, 0f);
