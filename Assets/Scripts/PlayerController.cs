@@ -19,11 +19,9 @@ public class PlayerController : MonoBehaviour
         float moveZ = Input.GetAxis("Vertical");
         Rigidbody rb = GetComponent<Rigidbody>();
 
-        Vector3 move = new Vector3(moveX, 0, moveZ);
+        Vector3 position = transform.forward * moveZ + transform.right * moveX;
         // movement based on WASD
-  
-            rb.MovePosition(rb.transform.position + move * Const.MOVESPEED);
-            //rb.MovePosition(rb.transform.position + rb.transform.forward * moveZ * Const.MOVESPEED);
+        rb.MovePosition(rb.transform.position + position * Const.MOVESPEED);
 
         if (rotation != 0)
         {
